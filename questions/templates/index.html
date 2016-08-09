@@ -1,0 +1,14 @@
+{% if question_list %}
+    <form action="{% url 'questions:submit_quiz' %}" method="post">
+    {% csrf_token %}
+        <ul>
+        {% for question in question_list %}
+            <li>{{ question.question_text }}</li>
+            <input type="text" name="answer-{{ question.id }}" />
+        {% endfor %}
+        </ul>
+        <button type="submit">Submit</button>
+    </form>
+{% else %}
+    <p>No questions are available.</p>
+{% endif %}
